@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2>Edit Project</h2>
+          <%= form_for @project, url: admin_project_path do |f| %>
+            <div class="field">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control", required: true %>
+            </div><br/>
+            
+            <% if @users_array.present? %>
+              <h4><%= f.label :user_listing %></h4>
+              <% @users_array.each do |user_name, user_id| %>
+                <div class="checkbox">
+                  <%= check_box_tag 'user_ids[]', user_id, @project.user_ids.include?(user_id) %>
+                  <%= f.label user_name %>
+                </div>
+              <% end %>
+            <% end %>
+            
+            <div class="actions">
+              <%= f.button "Save".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",
+              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %> 
+            </div><br/>
+            <%= link_to 'Back', admin_projects_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

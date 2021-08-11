@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @projects.present? %>
+            <h2>Listing All Projects</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @projects.each do |project| %>
+                  <tr>
+                    <td><%= project.name %></td>
+                    <td>
+                      <%= link_to 'Update', edit_admin_project_path(project),class: "btn btn-primary" %>
+                      <%= link_to 'Destroy', admin_project_path(project), method: :delete ,data: { confirm: "Are you sure you want to delete Project?" }, class: "btn btn-warning"%>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Projects not available</h3>
+          <% end %>
+          <%= link_to 'Create Project', new_admin_project_path ,class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

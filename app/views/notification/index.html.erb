@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @notify_users.present? %>
+            <h2>All Notifications</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @notify_users.each do |notify_user| %>
+                  <tr class="<%= notify_user.unread? ? 'bg-light text-dark font-weight-bold' : '' %>" >
+                    <td><%= notify_user.notification.title %></td>
+                    <td><%= truncate(strip_tags(notify_user.notification.description.to_s),lenght: 10) %></td>
+                    <td><%= notify_user.status %></td>
+                    <td>
+                      <%= link_to 'Show more', notification_path(notify_user.id),class: "btn btn-warning" %>
+                    </td.
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Notifications not available</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @systems.present? %>
+            <h2>Listing Systems</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Purchase Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @systems.each do |system| %>
+                  <tr>
+                    <td> <%= system.name %> </td>
+                    <td> <%= system.description %> </td>
+                    <td> <%= date_format(system.purchase_date) %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Systems not available</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

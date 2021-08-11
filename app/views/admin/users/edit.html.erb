@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2 class="text-primary">Update User</h2>
+          <%= form_for @user, url: "/admin/users/#{@user.id}" do |f| %>
+
+            <% if @user.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@user.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="row mt-3">
+              <div class="col">
+                <h2><%= f.label :gender  %></h2>
+                <%= f.label :gender, "Male", :value => "true"  %>
+                <%= f.radio_button :gender, true %>&nbsp;&nbsp;
+                <%= f.label :gender, "Female", :value => "false" %>
+                <%= f.radio_button :gender, false %>
+              </div><br/>
+              <div class="col">
+                <%= f.label :email %>
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="col">
+                <%= f.label :qualification %><br />
+                <%= f.text_field :qualification, class: "form-control" %>
+              </div>
+            </div><br/>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :birth_date %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= f.text_field :birth_date,class: "form-control datetimepicker-input" %>
+                  <div class="input-group-append" data-target="#user_birth_date" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <%= f.label :joining_date %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= f.text_field :joining_date,class: "form-control datetimepicker-input" %>
+                  <div class="input-group-append" data-target="#user_joining_date" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div><br/>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :mobile_number %><br />
+                <%= f.text_field :mobile_number, class: "form-control" %><br />
+              </div>
+              <div class="col">
+                <%= f.label :parent_mobile_number %><br />
+                <%= f.text_field :parent_mobile_number, class: "form-control" %><br />
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.label :address %>
+              <%= f.rich_text_area :address,class: "form-control" %>
+            </div><br/>
+
+            <div class="field">
+              <%= f.label :native_address %>
+              <%= f.rich_text_area :native_address,class: "form-control" %>
+            </div><br/>
+
+            <div class="actions">
+              <%= f.button "Update User".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %>
+            </div><br/>
+          <% end %>
+          <%= link_to 'Back', admin_users_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

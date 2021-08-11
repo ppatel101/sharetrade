@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2> User Detail:</h2>
+          <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9"><%= current_user.name %></dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9"><%= current_user.email %></dd>
+
+            <% if current_user.birth_date %>
+              <dt class="col-sm-3">Birth Date</dt>
+              <dd class="col-sm-9"><%= current_user.birth_date %></dd>
+            <% end %>
+          
+            <% if current_user.joining_date %>
+              <dt class="col-sm-3">Joining Date</dt>
+              <dd class="col-sm-9"><%= current_user.joining_date %></dd>
+            <% end %>
+
+            <% if !current_user.gender.nil? %>
+              <dt class="col-sm-3">Gender</dt>
+              <dd class="col-sm-9"><%= current_user.gender ? 'Male' : 'Female' %></dd>
+            <% end %>
+
+            <% if current_user.qualification.present? %>
+              <dt class="col-sm-3">Qualification</dt>
+              <dd class="col-sm-9"><%= current_user.qualification %></dd>
+            <% end %>
+            
+            <% if current_user.mobile_number.present? %>
+              <dt class="col-sm-3">Mobile Number</dt>
+              <dd class="col-sm-9"><%= current_user.mobile_number %></dd>
+            <% end %>
+
+            <% if current_user.parent_name %>
+              <dt class="col-sm-3">Parent Name</dt>
+              <dd class="col-sm-9"><%= current_user.parent_name %></dd>
+            <% end %>
+
+            <% if current_user.parent_mobile_number.present? %>
+              <dt class="col-sm-3">Parent Mobile Number</dt>
+              <dd class="col-sm-9"><%= current_user.parent_mobile_number %></dd>
+            <% end %>
+
+            <% if current_user.address.present? %>
+              <dt class="col-sm-3">Address</dt>
+              <dd class="col-sm-9"><%= current_user.address %></dd>
+            <% end %>
+
+            <% if current_user.native_address.present? %>
+            <dt class="col-sm-3">Native Address</dt>
+            <dd class="col-sm-9"><%= current_user.native_address %></dd>
+          <% end %>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @daily_updates.present? %>
+            <h2>Listing All Daily Updates</h2>
+            <%= form_tag root_path, method: :get do  %>
+              <div class="row ml-1">
+                <div class="field">
+                  <%= select_tag :updates_select_by_month_year, options_for_select(@updates_select_by_month_year),{ :include_blank => "Find by month-year", :class => "form-control"} %>
+                </div>&nbsp;&nbsp;
+                <div class="actions">
+                  <%= submit_tag "Find",class: "btn btn-primary" %>
+                </div>
+              </div><br/>
+            <% end %>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Description</th>
+                  <th>Created Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @daily_updates.each do |update| %>
+                  <tr>
+                    <td><%= update.description %></td>
+                    <td><%= date_format(update.created_at) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Daily Updates not available</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

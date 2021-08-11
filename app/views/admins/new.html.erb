@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2>New Admin</h2>
+          <%= form_for @admin, url: admins_path do |f| %>
+            <% if @admin.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@admin.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @admin.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control", required: true %>
+              </div>
+              <div class="col">
+                <%= f.label :organization %>
+                <%= f.select :organization_id, options_for_select(@organization_array), { :include_blank => "Please select Organization"}, {:class => "form-control"} %>
+              </div>
+            </div><br/>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :email %>
+                <%= f.text_field :email, class: "form-control" %>
+              </div>
+              <div class="col">
+                <%= f.label :password %>
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+            </div><br/>
+
+            <div class="actions">
+              <%= f.button "Create".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",
+              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %> 
+            </div><br/>
+            <%= link_to 'Back', admins_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

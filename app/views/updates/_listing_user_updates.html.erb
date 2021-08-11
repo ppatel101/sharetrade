@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @daily_updates.present? %>
+            <h2>Listing All Daily Updates</h2>
+            <%= form_tag updates_path, method: :get do  %>
+              <div class="row ml-1">
+                <div class="field">
+                  <%= select_tag :updates_select_by_month_year, options_for_select(@updates_select_by_month_year),{ :include_blank => "Find by month-year", :class => "form-control"} %>
+                </div>&nbsp;&nbsp;
+                <div class="actions">
+                  <%= submit_tag "Find",class: "btn btn-primary" %>
+                </div>
+              </div><br/>
+            <% end %>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Description</th>
+                  <th>Created Date</th>
+                  <th>In Time</th>
+                  <th>Out Time</th>
+                  <th>Total hours</th>
+                  <th>
+                    <% if @daily_updates.map{|update| date_format(update.created_at)}.include? date_format(Date.today) %>
+                      Actions
+                    <% end %>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @daily_updates.each do |update| %>
+                  <tr>
+                    <td><%= update.description %></td>
+                    <td><%= date_format(update.created_at) %></td>
+                    <td>
+                      <% if update.in_time.present? %>
+                        <%= time_format(update.in_time) %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if update.out_time.present? %>
+                        <%= time_format(update.out_time) %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if update.in_time.present? && update.out_time.present? %>
+                        <%= total_time(update.in_time,update.out_time) %>
+                      <% end %>
+                    </td>
+                    <td>
+                    <% if date_format(update.created_at) == date_format(Date.today) %>
+                      <%= link_to 'Edit', edit_update_path(update) ,class: "btn btn-warning" %>
+                    <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Daily Updates not available</h3>
+          <% end %>
+          <% if request.path.include?("/updates") %>
+            <%= link_to 'New Update', new_update_path ,class: "btn btn-warning" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

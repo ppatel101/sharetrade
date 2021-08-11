@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2>New System</h2>
+          <%= form_for @system, url: admin_systems_path do |f| %>
+            <% if @system.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@system.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @system.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="col">
+                <%= f.label :user_listing %>
+                <%= f.select :user_id, options_for_select(@users_array), { :include_blank => "Please select User"}, {:class => "form-control"} %>
+              </div>
+            </div><br/>
+
+            <div class="row">
+              <div class="col">
+                <%= f.label :purchase_date %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= f.text_field :purchase_date, class: "form-control datetimepicker-input" %>
+                  <div class="input-group-append" data-target="#system_purchase_date" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <%= f.label :warranty_month %>
+                <%= f.text_field :warranty_month, class: "form-control" %>
+              </div>
+            </div><br/>
+
+            <div class="field">
+              <%= f.label :description %>
+              <%= f.rich_text_area :description,class: "form-control" %>
+            </div><br/>
+            
+            <div class="actions">
+              <%= f.button "Save".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",
+              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %> 
+            </div><br/>
+            <%= link_to 'Back', admin_systems_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

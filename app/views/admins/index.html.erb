@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+        <h2>Listing All Admin</h2>
+           <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Organization</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @admins.each do |admin| %> 
+                  <td><%= admin.name %></td>
+                  <td><%= admin.email %></td>
+                  <td>
+                    <% if admin.organization %>
+                      <%= admin.organization.name %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to 'Edit', edit_admin_path(admin) ,class: "btn btn-warning" %>
+                    <%= link_to 'Destroy', admin_path(admin), method: :delete ,data: { confirm: "Are you sure you want to delete system?" }, class: "btn btn-primary"%>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'New Admin', new_admin_path ,class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

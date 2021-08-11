@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <div class="row">
+            <h2 class="mr-auto ml-3">
+              <%= @user.name %>'s Updates
+            </h2>
+            
+            <%= form_tag admin_user_path, method: :get do  %>
+              <div class="row mr-3">
+                <div class="field">
+                  <%= select_tag :updates_select_by_month_year, options_for_select(@updates_select_by_month_year),{ :include_blank => "Find by month-year", :class => "form-control"} %>
+                </div>&nbsp;&nbsp;
+                <div class="actions">
+                  <%= submit_tag "Find",class: "btn btn-primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="row">
+            <h5 class="ml-3">
+              <span class="text-primary"> <%= @user.email %> </span>
+            </h5>
+          </div>
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @daily_updates.each do |update| %>
+                <tr>
+                  <td><%= date_format(update.created_at) %></td>
+                  <td><%= update.description %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to 'Back', admin_users_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

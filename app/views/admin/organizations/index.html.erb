@@ -1,0 +1,39 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @organizations.present? %>
+            <h4> Listing all organizations </h4>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Domain</th>
+                  <th>
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @organizations.each do |organization| %>
+                  <tr>
+                    <td><%= organization.name %></td>
+                    <td><%= organization.domain %></td>
+                    <td>
+                      <%= link_to 'Edit', edit_admin_organization_path(organization) ,class: "btn btn-warning" %>
+                      <%= link_to 'Destroy', admin_organization_path(organization), method: :delete ,data: { confirm: "Are you sure you want to delete organization?" }, class: "btn btn-primary"%>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h4> No Organizations Available</h4>
+          <% end %>
+          <%= link_to 'New Organization', new_admin_organization_path ,class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

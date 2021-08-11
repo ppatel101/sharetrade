@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2>New Update</h2>
+          <%= form_for @update, url: updates_path do |form| %>
+            <% if @update.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@update.errors.count, "error") %>.
+                </div>
+                <ul>
+                <% @update.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div class="row">
+              <div class="col">
+                <%= form.label :in_time %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= form.text_field :in_time, class: "form-control timepicker-input" %>
+                  <div class="input-group-append" data-target="#daily_update_in_time" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <%= form.label :out_time %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= form.text_field :out_time, class: "form-control timepicker-input" %>
+                  <div class="input-group-append" data-target="#daily_update_out_time" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div><br/>
+            <div class="field">
+              <%= form.label :description %><br>
+              <%= form.rich_text_area :description,class: "form-control" %><br/>
+            </div>
+
+            <div class="actions">
+              <%= form.button "Save".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",
+              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %> 
+            </div><br/>
+            <%= link_to 'Back', updates_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

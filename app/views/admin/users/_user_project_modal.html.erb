@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4 class="modal-title">Assign Project List</h4>
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+  <% @projects.each do |project| %>
+    <li class="list-group-item text-primary"><%= project.name %></li>
+  <% end %>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>

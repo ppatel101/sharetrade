@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @leave_applications.present? %>
+            <h2>Leave application report</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Employee Name</th>  
+                  <th>Subject</th>
+                  <th>Description</th>
+                  <th>From Date</th>
+                  <th>To Date</th>
+                  <th>Total Leave Days</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @leave_applications.each do |leave_application| %>
+                  <tr>
+                    <td> <%= leave_application.user.name %> </td>
+                    <td> <%= leave_application.subject %> </td>
+                    <td> <%= leave_application.description %> </td>
+                    <td> <%= date_format(leave_application.from_date) %> </td>
+                    <td> <%= date_format(leave_application.to_date) %> </td>
+                    <td> <%= leave_application.half_day? ? 'Half Day' : leave_application.total_days %> </td>
+                    <td> <%= leave_application.status %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+          <%= link_to 'New Leave Application', new_leave_application_path,class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

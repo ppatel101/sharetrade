@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <h2>Edit Daily Updates</h2>
+          <%= form_for @daily_update, url: update_path do |f| %>
+            <div class="row">
+              <div class="col">
+                <%= f.label :in_time %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= f.text_field :in_time, class: "form-control timepicker-input", value: f.object.in_time.nil? ? nil : time_format(f.object.in_time) %>
+                  <div class="input-group-append" data-target="#daily_update_in_time" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <%= f.label :out_time %>
+                <div class="input-group date" data-target-input="nearest">
+                  <%= f.text_field :out_time, class: "form-control timepicker-input", value: f.object.out_time.nil? ? nil : time_format(f.object.out_time) %>
+                  <div class="input-group-append" data-target="#daily_update_out_time" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div><br/>
+            <div class="field">
+              <%= f.label :description %><br>
+              <%= f.rich_text_area :description,class: "form-control" %><br/>
+            </div>
+
+            <div class="actions">
+              <%= f.button "Save".html_safe, type: :submit, class: "btn btn-lg btn-primary btn-block",
+              data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } %> 
+            </div><br/>
+          <% end %>
+          <%= link_to 'Back', updates_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

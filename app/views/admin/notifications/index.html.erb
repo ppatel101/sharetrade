@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="card-body">
+          <% if @notifications.present? %>
+            <h2>Listing All Notifications</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @notifications.each do |notification| %>
+                  <tr>
+                    <td><%= notification.title %></td>
+                    <td><%= truncate(strip_tags(notification.description.to_s),lenght: 10) %></td>
+                    <td>
+                      <%= link_to 'Update Notification', edit_admin_notification_path(notification),class: "btn btn-warning" %>
+                      <%= link_to 'Show more', admin_notification_path(notification),class: "btn btn-primary" %>
+                      <%= link_to 'Destroy', admin_notification_path(notification), method: :delete ,data: { confirm: "Are you sure you want to delete notification?" }, class: "btn btn-warning"%>
+
+                      <% if notification.notify_users.pluck(:status).include? 'read' %>
+                        <%= link_to 'ViewedBy', admin_notification_path(notification), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
+                      <% end %>
+
+                      <div id="modal-window" class="modal hide fade" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content"></div>
+                        </div>
+                      </div>
+                      
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Notifications not available</h3>
+          <% end %>
+          <%= link_to 'Create Notification', new_admin_notification_path ,class: "btn btn-warning" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
