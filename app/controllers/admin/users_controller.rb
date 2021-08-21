@@ -3,11 +3,7 @@ class Admin::UsersController < AdminController
   before_action :find_user, except: [:index, :new, :create]
 
   def index
-    if current_admin.organization
-      @users = current_admin.users
-    else
-      @users = []
-    end
+    @users = User.all
   end
 
   def new
@@ -15,11 +11,7 @@ class Admin::UsersController < AdminController
   end
 
   def create
-    if current_admin.organization
-      @user = current_admin.organization.users.new(user_params)
-    else
-      @user = User.new(user_params)
-    end
+    @user = User.new(user_params.merge(organization_id: 1))
     respond_to do |format|
       if @user.save
         format.html { redirect_to admin_users_path, notice: 'User was successfully created.' }

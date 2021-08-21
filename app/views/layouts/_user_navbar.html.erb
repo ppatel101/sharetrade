@@ -27,7 +27,7 @@
     </ul>
   <% else %>
     <div class="collapse navbar-collapse" id="navbarNavDropdown"> 
-      <span class="mr-auto" style="color:white">Employee Portal</span>
+      <span class="mr-auto" style="color:white">User Portal</span>
       <ul class="navbar-nav ml-auto mr-4">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,7 +35,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to 'Admin', new_admin_session_path, class: "dropdown-item" %>
-            <%= link_to 'Employee', new_user_session_path, class: "dropdown-item" %>
+            <%= link_to 'User', new_user_session_path, class: "dropdown-item" %>
           </div>
         </li>
       </ul>

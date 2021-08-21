@@ -5,7 +5,7 @@
         <%= link_to 'Home', admin_root_path, class: "nav-link active" %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Employees', admin_users_path ,class: "nav-link active" %>
+        <%= link_to 'Users', admin_users_path ,class: "nav-link active" %>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -35,7 +35,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to 'Admin', new_admin_session_path, class: "dropdown-item" %>
-            <%= link_to 'Employee', new_user_session_path, class: "dropdown-item" %>
+            <%= link_to 'User', new_user_session_path, class: "dropdown-item" %>
           </div>
         </li>
       </ul>
