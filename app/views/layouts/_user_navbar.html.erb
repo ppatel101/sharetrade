@@ -4,23 +4,6 @@
       <li class="nav-item">
         <%= link_to 'Home', root_path, class: "nav-link active" %>
       </li>
-      <li class="nav-item">
-        <%= link_to 'Leaves', leave_applications_path, class: "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Updates', updates_path ,class: "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to unread_notification_count > 0 ? "Notifications <span class='badge badge-light'>#{unread_notification_count}</span>".html_safe : "Notification",
-        notification_index_path,
-        class: unread_notification_count > 0 ? "btn btn-primary btn-sm mt-1" : "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Systems', systems_path ,class: "nav-link active" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'Projects', projects_path ,class: "nav-link active" %>
-      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
@@ -36,7 +19,6 @@
           </span>
           <div class="dropdown-divider"></div>
             <%= link_to 'Your Profile', root_path, class: "dropdown-item text-primary" %>
-            <%= link_to 'Notifications', notification_index_path ,class: "dropdown-item text-primary" %>
             <%= link_to 'Change Password', passwords_edit_path, class: "dropdown-item text-primary" %>
           <div class="dropdown-divider"></div>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item text-primary"%>
