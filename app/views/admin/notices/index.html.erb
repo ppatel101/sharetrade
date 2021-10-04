@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card my-5 shadow">
+        <div class="col mt-2">
+          <%= link_to 'Create Notification', new_admin_notice_path ,class: "btn btn-warning" %>
+        </div>
+        <div class="card-body">
+          <% if @notifications.present? %>
+            <h2>Listing All Notifications</h2>
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @notifications.each do |notification| %>
+                  <tr>
+                    <td><%= notification.title %></td>
+                    <td><%= truncate(strip_tags(notification.description.to_s),lenght: 10) %></td>
+                    <td>
+                      <%= link_to 'Update Notification', edit_admin_notice_path(notification),class: "btn btn-warning" %>
+                      <%= link_to 'Show more', admin_notice_path(notification),class: "btn btn-primary" %>
+                      <%= link_to 'Destroy', admin_notice_path(notification), method: :delete ,data: { confirm: "Are you sure you want to delete notification?" }, class: "btn btn-warning"%>
+
+                      <div id="modal-window" class="modal hide fade" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content"></div>
+                        </div>
+                      </div>
+                      
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h3>Notifications not available</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

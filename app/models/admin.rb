@@ -8,4 +8,5 @@ class Admin < ApplicationRecord
   delegate :notifications, to: :organization
   delegate :systems, to: :organization
   delegate :projects, to: :organization
+  has_many :notices
 end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/admin', to: "admin#index", as: 'admin_root'
   resources :leave_applications, only: [:index,:new,:create]
   resources :notification, only: [:index,:show]
+  resources :notices, only: [:index,:show]
   resources :updates, except: :destroy
   resources :systems, only: :index
   resources :admins, except: :show
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
         patch 'passwords/update'
       end
     end
+    resources :notices
     resources :notifications
     resources :organizations, except: :show
     resources :systems, except: :show

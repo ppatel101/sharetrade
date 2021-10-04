@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #97b9d1 !important;">
   <% if admin_signed_in? %>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
@@ -6,6 +6,9 @@
       </li>
       <li class="nav-item">
         <%= link_to 'Users', admin_users_path ,class: "nav-link active" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Notifications', admin_notices_path ,class: "nav-link active" %>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

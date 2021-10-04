@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title">ViewedBy</h4>
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+  <% @notification.notify_users.each do |notify_user| %>
+    <% if notify_user.read? %>
+      <li class="list-group-item text-primary"><%= notify_user.user.name %></li>
+    <% end %>
+  <% end %>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
